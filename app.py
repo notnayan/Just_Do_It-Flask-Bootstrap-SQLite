@@ -29,6 +29,23 @@ def just_do_it():
     allDoIt = JustDoIt.query.all()
     return render_template('index.html', allDoIt=allDoIt)
 
+
+@app.route('/update/<int:sno>', methods=["GET", "POST"])
+def update(sno):
+    if request.method == "POST":
+        title = request.form["title"]
+        desc = request.form["desc"]
+        doit = JustDoIt.query.filter_by(sno=sno).first()
+        doit.title = title
+        doit.desc = desc
+        db.session.add(doit)
+        db.session.commit()
+        return redirect("/")
+
+    doit = JustDoIt.query.filter_by(sno=sno).first()
+    return render_template('update.html', doit=doit)
+
+
 @app.route('/delete/<int:sno>')
 def delete(sno):
     doit = JustDoIt.query.filter_by(sno=sno).first()
@@ -36,11 +53,12 @@ def delete(sno):
     db.session.commit()
     return redirect("/")
 
+
 def create_database():
     with app.app_context():
         db.create_all()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     create_database()
     app.run(debug=True, port=6969)

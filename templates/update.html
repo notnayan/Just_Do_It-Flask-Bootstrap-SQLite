@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block body %} 
 
-<!-- ADD TO DO -->
+<!-- UPDATE TO DO -->
 <div class="container my-3">
-  <h2>DO IT</h2>
-  <form action="/" method="POST">
+  <h2>UPDATE</h2>
+  <form action="/update/{{doit.sno}}" method="POST">
     <div class="form-group">
       <label for="inputTitle">Title</label>
       <input
@@ -12,6 +12,7 @@
         class="form-control"
         name="title"
         id="inputTitle"
+        value="{{doit.title}}"
         aria-describedby="emailHelp"
         placeholder="Enter title"
       />
@@ -23,57 +24,12 @@
         class="form-control"
         name="desc"
         id="inputDesc"
+        value="{{doit.desc}}"
         placeholder="Description"
       />
     </div>
-    <button type="submit" class="btn btn-outline-success">ADD</button>
+    <button type="submit" class="btn btn-outline-success">UPDATE</button>
   </form>
-</div>
-
-<!-- TABLE -->
-<div class="container my-3">
-  <h2>JUST DO IT</h2>
-  <table class="table">
-    {% if allDoIt|length == 0 %}
-    <div class="alert alert-dark" role="alert">
-      Empty! Start adding your tasks.
-    </div>
-    {% else %}
-    <thead>
-      <tr>
-        <th scope="col">SNo.</th>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
-        <th scope="col">Time</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for doit in allDoIt %}
-      <tr>
-        <th scope="row">{{loop.index}}</th>
-        <td>{{doit.title}}</td>
-        <td>{{doit.desc}}</td>
-        <td>{{doit.date_added}}</td>
-        <td>
-          <a
-            href="/update/{{doit.sno}}"
-            type="submit"
-            class="btn btn-warning btn-sm mx-1"
-            >UPDATE</a
-          >
-          <a
-            href="/delete/{{doit.sno}}"
-            type="submit"
-            class="btn btn-danger btn-sm mx-1"
-            >DELETE</a
-          >
-        </td>
-      </tr>
-      {% endfor %} 
-      {% endif %}
-    </tbody>
-  </table>
 </div>
 
 <!-- Optional JavaScript -->
