@@ -34,7 +34,7 @@
       <!-- ADD -->
       <div class="container my-3">
         <h2>DO IT</h2>
-        <form>
+        <form action="/" method="POST">
           <div class="form-group">
             <label for="inputTitle">Title</label>
             <input
@@ -63,26 +63,46 @@
       <!-- TABLE -->
       <div class="container my-3">
         <h2>JUST DO IT</h2>
-        <table class="table my-3">
-            <thead>
-              <tr>
-                <th scope="col">Sno.</th>
-                <th scope="col">Title</th>
-                <th scope="col">Description</th>
-                <th scope="col">Date</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>TO DO WEBSITE</td>
-                <td>Build a To Do Website using Flask.</td>
-                <td>UTC</td>
-                <td><button type="button" class="btn btn-warning btn-sm mx-1 ">UPDATE</button> <button type="button" class="btn btn-danger btn-sm mx-1">DELETE</button></td>
-              </tr>
-            </tbody>
-          </table>
+        <table class="table">
+          {% if allDoIt|length == 0 %}
+          <div class="alert alert-dark" role="alert">
+            Empty! Start adding your tasks.
+          </div>
+          {% else %}
+          <thead>
+            <tr>
+              <th scope="col">SNo.</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Time</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for doit in allDoIt %}
+            <tr>
+              <th scope="row">{{loop.index}}</th>
+              <td>{{doit.title}}</td>
+              <td>{{doit.desc}}</td>
+              <td>{{doit.date_added}}</td>
+              <td>
+                <a
+                  href="/update/{{doit.sno}}"
+                  type="submit"
+                  class="btn btn-warning btn-sm mx-1"
+                  >UPDATE</a
+                >
+                <a
+                  href="/delete/{{doit.sno}}"
+                  type="submit"
+                  class="btn btn-danger btn-sm mx-1"
+                  >DELETE</a
+                >
+              </td>
+            </tr>
+            {% endfor %} {% endif %}
+          </tbody>
+        </table>
       </div>
 
     <!-- Optional JavaScript -->

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -18,9 +18,16 @@ class JustDoIt(db.Model):
         return f"{self.sno} - {self.title}"
 
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def just_do_it():
-    return render_template("index.html")
+    if request.method == "POST":
+        title = request.form["title"]
+        desc = request.form["desc"]
+        doit = JustDoIt(title=title, desc=desc)
+        db.session.add(doit)
+        db.session.commit()
+    allDoIt = JustDoIt.query.all()
+    return render_template('index.html', allDoIt=allDoIt)
 
 
 def create_database():
