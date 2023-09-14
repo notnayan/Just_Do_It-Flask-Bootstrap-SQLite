@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -29,6 +29,12 @@ def just_do_it():
     allDoIt = JustDoIt.query.all()
     return render_template('index.html', allDoIt=allDoIt)
 
+@app.route('/delete/<int:sno>')
+def delete(sno):
+    doit = JustDoIt.query.filter_by(sno=sno).first()
+    db.session.delete(doit)
+    db.session.commit()
+    return redirect("/")
 
 def create_database():
     with app.app_context():
