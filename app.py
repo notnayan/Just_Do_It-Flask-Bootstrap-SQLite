@@ -36,8 +36,12 @@ def update(sno):
         title = request.form["title"]
         desc = request.form["desc"]
         doit = JustDoIt.query.filter_by(sno=sno).first()
+
         doit.title = title
         doit.desc = desc
+
+        doit.date_added = datetime.utcnow()
+
         db.session.add(doit)
         db.session.commit()
         return redirect("/")

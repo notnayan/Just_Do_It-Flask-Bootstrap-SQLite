@@ -1,37 +1,36 @@
-{% extends 'base.html' %}
-{% block body %} 
-
-<!-- UPDATE TO DO -->
-<div class="container my-3">
-  <h2>UPDATE</h2>
-  <form action="/update/{{doit.sno}}" method="POST">
-    <div class="form-group">
-      <label for="inputTitle">Title</label>
-      <input
-        type="text"
-        class="form-control"
-        name="title"
-        id="inputTitle"
-        value="{{doit.title}}"
-        aria-describedby="emailHelp"
-        placeholder="Enter title"
-      />
-    </div>
-    <div class="form-group">
-      <label for="inputDesc">Description</label>
-      <input
-        type="text"
-        class="form-control"
-        name="desc"
-        id="inputDesc"
-        value="{{doit.desc}}"
-        placeholder="Description"
-      />
-    </div>
-    <button type="submit" class="btn btn-outline-success">UPDATE</button>
-  </form>
-</div>
-
+{% extends 'base.html' %} {% block body %}
+<main>
+  <!-- ADD TO DO -->
+  <div class="container">
+    <h2><br />UPDATE</h2>
+    <form action="/update/{{doit.sno}}" method="POST">
+      <div class="form-group">
+        <label for="inputTitle">TITLE</label>
+        <input
+          type="text"
+          class="form-control"
+          name="title"
+          id="inputTitle"
+          value="{{doit.title}}"
+          aria-describedby="emailHelp"
+          placeholder="Enter title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="inputDesc">DESCRIPTION</label>
+        <input
+          type="text"
+          class="form-control"
+          name="desc"
+          id="inputDesc"
+          value="{{doit.desc}}"
+          placeholder="Description"
+        />
+      </div>
+      <button type="submit" class="btn btn-outline-success">ADD</button>
+    </form>
+  </div>
+</main>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script
